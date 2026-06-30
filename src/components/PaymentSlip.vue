@@ -235,7 +235,7 @@ export default {
   width: 200px;
   position: absolute;
   top: 148px;
-  left: 323px;
+  left: 331px;
   border: 0 solid;
   background: transparent;
   font-size: 12px;
@@ -243,10 +243,10 @@ export default {
 }
 
 .uplatnica-wrapper .sifra-namjene {
-  height: 27px;
   position: absolute;
-  top: 187px;
-  left: 232px;
+  left: 237px;
+  height: 25px;
+  top: 194px;
   border: 0 solid;
   background: transparent;
   width: 57px;
@@ -257,9 +257,9 @@ export default {
   width: 249px;
   position: absolute;
   background: transparent;
-  top: 183px;
-  left: 384px;
-  height: 50px;
+  top: 194px;
+  left: 237px;
+  height: 25px;
   border: 0 solid;
   font-size: 12px;
   resize: none;
@@ -318,7 +318,7 @@ export default {
 .uplatnica-wrapper .poziv-na-broj-primatelja-desno {
   position: absolute;
   right: 30px;
-  top: 156px;
+  top: 150px;
   border: 0 solid;
   background: transparent;
   padding-top: 3px;
