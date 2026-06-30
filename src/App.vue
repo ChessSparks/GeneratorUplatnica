@@ -63,7 +63,12 @@
         <template v-if="csvSlips.length > 0">
           <div class="preview-bar">
             <span class="preview-label">{{ csvSlips.length }} uplatnica(e) učitano</span>
-            <button class="btn-print" @click="printSlips">Ispiši sve / Spremi PDF</button>
+            <div class="preview-actions">
+              <button class="btn-zip" @click="downloadZip" :disabled="zipping">
+                {{ zipping ? 'Generiranje...' : 'Preuzmi ZIP' }}
+              </button>
+              <button class="btn-print" @click="printSlips">Ispiši sve / Spremi PDF</button>
+            </div>
           </div>
           <div class="print-area">
             <PaymentSlip
@@ -94,6 +99,7 @@ export default {
     const activeTab = ref('single');
     const singleSlip = ref(null);
     const csvSlips = ref([]);
+    const zipping = ref(false);
 
     onMounted(() => {
       setTimeout(() => { loading.value = false; }, 3000);
@@ -119,7 +125,39 @@ export default {
       window.print();
     }
 
-    return { loading, activeTab, singleSlip, csvSlips, switchTab, onSingleGenerate, onCsvLoaded, onBarcodeGenerated, printSlips };
+    async function downloadZip() {
+      if (!csvSlips.value.length || zipping.value) return;
+      zipping.value = true;
+      try {
+        const [{ default: JSZip }, { toPng }] = await Promise.all([
+          import('jszip'),
+          import('html-to-image'),
+        ]);
+
+        const zip = new JSZip();
+        const slipEls = document.querySelectorAll('.uplatnica-wrapper');
+
+        for (let i = 0; i < slipEls.length; i++) {
+          const slip = csvSlips.value[i];
+          const rawName = (slip.imePlatitelja || '').trim() || `uplatnica_${i + 1}`;
+          const safeName = rawName.replace(/[\\/:*?"<>|]/g, '_');
+          const dataUrl = await toPng(slipEls[i], { pixelRatio: 2 });
+          zip.file(`${safeName}.png`, dataUrl.split(',')[1], { base64: true });
+        }
+
+        const blob = await zip.generateAsync({ type: 'blob' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'uplatnice.zip';
+        a.click();
+        URL.revokeObjectURL(url);
+      } finally {
+        zipping.value = false;
+      }
+    }
+
+    return { loading, activeTab, singleSlip, csvSlips, zipping, switchTab, onSingleGenerate, onCsvLoaded, onBarcodeGenerated, printSlips, downloadZip };
   },
 };
 </script>
@@ -392,6 +430,37 @@ body {
   box-shadow: 0 0 8px rgba(79,124,255,0.8);
 }
 
+.preview-actions {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.btn-zip {
+  padding: 0.52rem 1.2rem;
+  background: rgba(124,92,252,0.12);
+  border: 1.5px solid rgba(124,92,252,0.35);
+  color: #a78bfa;
+  border-radius: 10px;
+  font-size: 0.855rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.btn-zip:hover:not(:disabled) {
+  background: rgba(124,92,252,0.22);
+  border-color: rgba(124,92,252,0.6);
+  color: #c4b5fd;
+}
+
+.btn-zip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .btn-print {
   padding: 0.52rem 1.35rem;
   background: linear-gradient(135deg, #3a60e8 0%, #4f7cff 60%, #6d96ff 100%);
@@ -454,6 +523,9 @@ body {
     gap: 0.65rem;
   }
 
+  .preview-actions { flex-direction: column; }
+
+  .btn-zip,
   .btn-print { width: 100%; text-align: center; }
 }
 
