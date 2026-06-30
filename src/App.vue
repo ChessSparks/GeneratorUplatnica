@@ -403,6 +403,44 @@ body {
   padding-bottom: 2.5rem;
 }
 
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .app-header {
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .app-brand { flex: 1; }
+
+  .bmc-btn {
+    margin-left: 0;
+    font-size: 0.73rem;
+    padding: 0.38rem 0.75rem;
+  }
+
+  .tabs {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tab-btn { flex: 1; text-align: center; }
+
+  .app-main {
+    margin: 1rem auto;
+    padding: 0 0.75rem;
+  }
+
+  .preview-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .btn-print { width: 100%; text-align: center; }
+}
+
 /* ── Print ── */
 @media print {
   .app-header, .preview-bar, .slip-form, .csv-upload { display: none !important; }

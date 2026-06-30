@@ -531,4 +531,26 @@ legend {
 }
 
 .error-msg::before { content: '⚠'; font-size: 0.85rem; }
+
+@media (max-width: 480px) {
+  .slip-form {
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
 </style>

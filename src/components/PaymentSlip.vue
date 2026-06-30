@@ -1,5 +1,6 @@
 <template>
-  <div class="uplatnica-wrapper" id="izvoz-uplatnice">
+  <div class="uplatnica-scale-outer" :style="outerStyle">
+  <div class="uplatnica-wrapper" id="izvoz-uplatnice" :style="wrapperStyle">
     <!-- Platitelj (top-left) -->
     <div class="platitelj">
       <input type="text" class="input-field" :value="userData.imePlatitelja" readonly />
@@ -56,11 +57,12 @@
     <!-- Right copy: opis -->
     <textarea class="opis-placanja-desno" :value="userData.opisPlacanja" readonly></textarea>
   </div>
+  </div>
 </template>
 
 
 <script>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 
 export default {
   name: 'PaymentSlip',
@@ -74,6 +76,20 @@ export default {
   setup(props, { emit }) {
     const barcodeCanvas = ref(null);
     const barcodeError = ref(null);
+
+    const slipScale = ref(1);
+    function updateScale() {
+      const available = window.innerWidth - 32;
+      slipScale.value = available >= 931 ? 1 : available / 931;
+    }
+
+    const outerStyle = computed(() => ({
+      height: `${Math.round(380 * slipScale.value)}px`,
+    }));
+    const wrapperStyle = computed(() => ({
+      transform: `scale(${slipScale.value})`,
+      transformOrigin: 'top left',
+    }));
 
     const formattedAmount = computed(() => {
       const raw = (props.userData.iznosTransakcije || '').toString().replace(',', '.');
@@ -126,15 +142,25 @@ export default {
       }
     }
 
-    onMounted(generateBarcode);
+    onMounted(() => {
+      updateScale();
+      window.addEventListener('resize', updateScale);
+      generateBarcode();
+    });
+    onUnmounted(() => window.removeEventListener('resize', updateScale));
     watch(() => props.userData, generateBarcode, { deep: true });
 
-    return { barcodeCanvas, barcodeError, formattedAmount };
+    return { barcodeCanvas, barcodeError, formattedAmount, outerStyle, wrapperStyle };
   },
 };
 </script>
 
 <style>
+.uplatnica-scale-outer {
+  width: 100%;
+  overflow: hidden;
+}
+
 .uplatnica-wrapper {
   width: 931px;
   height: 380px;
@@ -354,5 +380,14 @@ export default {
   outline: none !important;
   font-size: 12px;
   height: 20px;
+}
+
+@media print {
+  .uplatnica-scale-outer {
+    height: 380px !important;
+  }
+  .uplatnica-wrapper {
+    transform: none !important;
+  }
 }
 </style>
