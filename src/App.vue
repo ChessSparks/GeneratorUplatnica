@@ -132,7 +132,7 @@ Content-Type: application/json
             <span>Javite se s kratkim opisom vašeg projekta i dogovorimo detalje.</span>
           </div>
           <a class="api-cta-btn" href="mailto:nevendavidovic407@gmail.com?subject=HUB-3A API upit">
-            nevendavidovic407@gmail.com
+            Kontaktirajte me
           </a>
         </div>
       </div>

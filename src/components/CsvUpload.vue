@@ -81,7 +81,7 @@ export default {
         postanskiBrojIMjestoPrimatelja: row.postanskiBrojIMjestoPrimatelja || '',
         ibanPrimatelja: row.ibanPrimatelja || '',
         iznosTransakcije: row.iznosTransakcije || '',
-        modelPlacanja: row.modelPlacanja || 'HR00',
+        modelPlacanja: row.modelPlacanja || 'HR99',
         pozivNaBroj: row.pozivNaBroj || '',
         sifraNamjene: row.sifraNamjene || '',
         opisPlacanja: row.opisPlacanja || '',
