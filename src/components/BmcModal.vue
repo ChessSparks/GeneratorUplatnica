@@ -117,4 +117,8 @@ export default {
   border-color: #c7d7fc;
   color: #3b6cf7;
 }
+
+@media print {
+  .bmc-overlay { display: none !important; }
+}
 </style>

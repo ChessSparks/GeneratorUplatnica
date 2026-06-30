@@ -66,7 +66,7 @@
         <template v-if="csvSlips.length > 0">
           <div class="preview-bar">
             <span class="preview-label">{{ csvSlips.length }} uplatnica(e) učitano</span>
-            <button class="btn-print" @click="showCsvBmc = true">🖨 Ispiši sve / Spremi PDF</button>
+            <button class="btn-print" @click="printSlips">🖨 Ispiši sve / Spremi PDF</button>
           </div>
           <div class="print-area">
             <PaymentSlip
@@ -80,7 +80,6 @@
       </div>
     </main>
 
-    <BmcModal :modelValue="showCsvBmc" @skip="onCsvBmcSkip" />
   </div>
 </template>
 
@@ -89,17 +88,15 @@ import { ref, onMounted } from 'vue';
 import SlipForm from '@/components/SlipForm.vue';
 import CsvUpload from '@/components/CsvUpload.vue';
 import PaymentSlip from '@/components/PaymentSlip.vue';
-import BmcModal from '@/components/BmcModal.vue';
 
 export default {
   name: 'App',
-  components: { SlipForm, CsvUpload, PaymentSlip, BmcModal },
+  components: { SlipForm, CsvUpload, PaymentSlip },
   setup() {
     const loading = ref(true);
     const activeTab = ref('single');
     const singleSlip = ref(null);
     const csvSlips = ref([]);
-    const showCsvBmc = ref(false);
 
     onMounted(() => {
       setTimeout(() => { loading.value = false; }, 3000);
@@ -121,16 +118,11 @@ export default {
       console.log('Barcode generated:', barcodeText.substring(0, 40) + '...');
     }
 
-    function onCsvBmcSkip() {
-      showCsvBmc.value = false;
-      window.print();
-    }
-
     function printSlips() {
       window.print();
     }
 
-    return { loading, activeTab, singleSlip, csvSlips, showCsvBmc, switchTab, onSingleGenerate, onCsvLoaded, onBarcodeGenerated, onCsvBmcSkip, printSlips };
+    return { loading, activeTab, singleSlip, csvSlips, switchTab, onSingleGenerate, onCsvLoaded, onBarcodeGenerated, printSlips };
   },
 };
 </script>
@@ -143,10 +135,11 @@ export default {
 
 body {
   font-family: 'Inter', Arial, sans-serif;
-  background: #eef2fb;
+  background: #e8eeff;
   background-image:
-    radial-gradient(ellipse at 15% 40%, rgba(59, 108, 247, 0.07) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 10%, rgba(99, 74, 247, 0.05) 0%, transparent 55%);
+    radial-gradient(ellipse at 10% 30%, rgba(59, 108, 247, 0.13) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 0%,  rgba(120, 80, 255, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 90%, rgba(30, 200, 180, 0.07) 0%, transparent 50%);
   min-height: 100vh;
   color: #1a2035;
   -webkit-font-smoothing: antialiased;
@@ -238,14 +231,14 @@ body {
 
 /* ── Header ── */
 .app-header {
-  background: linear-gradient(135deg, #0c1a3d 0%, #1a3a7c 100%);
+  background: linear-gradient(135deg, #080f2e 0%, #0f2260 50%, #1a3a8f 100%);
   color: white;
   padding: 0.9rem 2.5rem;
   display: flex;
   align-items: center;
   gap: 2rem;
-  box-shadow: 0 4px 24px rgba(12, 26, 61, 0.45);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 4px 32px rgba(8, 15, 46, 0.6), 0 1px 0 rgba(255,255,255,0.06) inset;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -322,7 +315,7 @@ body {
   align-items: center;
   gap: 0.4rem;
   padding: 0.45rem 1.1rem;
-  background: linear-gradient(135deg, #f0c040 0%, #f5d565 100%);
+  background: linear-gradient(135deg, #f5c842 0%, #fde27a 100%);
   color: #1a1200;
   border-radius: 999px;
   font-size: 0.8rem;
@@ -330,13 +323,13 @@ body {
   font-family: inherit;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 3px 12px rgba(240,192,64,0.45);
+  box-shadow: 0 3px 14px rgba(240,192,64,0.5), 0 1px 0 rgba(255,255,255,0.4) inset;
   transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .bmc-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 18px rgba(240,192,64,0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(240,192,64,0.65), 0 1px 0 rgba(255,255,255,0.4) inset;
 }
 
 /* ── Main layout ── */
@@ -352,11 +345,13 @@ body {
   justify-content: space-between;
   align-items: center;
   margin: 1.5rem 0 0.85rem;
-  background: white;
-  border-radius: 12px;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
   padding: 0.85rem 1.25rem;
-  box-shadow: 0 2px 16px rgba(14,30,80,0.07);
-  border: 1px solid rgba(59,108,247,0.08);
+  box-shadow: 0 4px 24px rgba(14,30,80,0.08), 0 1px 0 rgba(255,255,255,0.9) inset;
+  border: 1px solid rgba(59,108,247,0.1);
 }
 
 .preview-label {
@@ -379,21 +374,21 @@ body {
 
 .btn-print {
   padding: 0.55rem 1.4rem;
-  background: linear-gradient(135deg, #1e4ac8 0%, #3b6cf7 100%);
+  background: linear-gradient(135deg, #1740b8 0%, #3b6cf7 60%, #5d8aff 100%);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 0.875rem;
   font-family: inherit;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(30,74,200,0.35);
+  box-shadow: 0 4px 16px rgba(30,74,200,0.4), 0 1px 0 rgba(255,255,255,0.2) inset;
   transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .btn-print:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(30,74,200,0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(30,74,200,0.5), 0 1px 0 rgba(255,255,255,0.2) inset;
 }
 
 .print-area {

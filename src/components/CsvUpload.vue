@@ -159,11 +159,13 @@ export default {
 
 <style scoped>
 .csv-upload {
-  background: white;
-  border-radius: 20px;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 22px;
   padding: 2rem 2.25rem;
-  box-shadow: 0 4px 32px rgba(14, 30, 80, 0.08), 0 1px 4px rgba(0,0,0,0.04);
-  border: 1px solid rgba(59, 108, 247, 0.07);
+  box-shadow: 0 8px 40px rgba(14, 30, 80, 0.10), 0 1px 0 rgba(255,255,255,0.95) inset;
+  border: 1px solid rgba(59, 108, 247, 0.10);
 }
 
 .csv-upload h2 {
@@ -186,11 +188,11 @@ export default {
 }
 
 .drop-zone {
-  border: 2px dashed #c5d5fb;
-  border-radius: 14px;
+  border: 2px dashed rgba(59,108,247,0.3);
+  border-radius: 16px;
   padding: 2.5rem 2rem;
   text-align: center;
-  background: #f7f9ff;
+  background: linear-gradient(145deg, #f4f7ff 0%, #eef2ff 100%);
   transition: all 0.2s;
   cursor: default;
 }

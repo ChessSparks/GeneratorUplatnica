@@ -251,12 +251,10 @@
     </p>
   </div>
 
-  <BmcModal :modelValue="showModal" @skip="continueGenerate" />
 </template>
 
 <script>
 import { ref, reactive, computed } from 'vue';
-import BmcModal from './BmcModal.vue';
 
 const MODEL_OPTIONS = [
   'HR00','HR01','HR02','HR03','HR04','HR05','HR06','HR07','HR08','HR09','HR10',
@@ -268,7 +266,6 @@ const MODEL_OPTIONS = [
 
 export default {
   name: 'SlipForm',
-  components: { BmcModal },
   emits: ['generate'],
   setup(_, { emit }) {
     const attempted = ref(false);
@@ -313,22 +310,10 @@ export default {
         form.opisPlacanja.trim() !== ''
     );
 
-    const showModal = ref(false);
-    const pendingData = ref(null);
-
     function generate() {
       attempted.value = true;
       if (!isValid.value) return;
-      pendingData.value = { ...form, iznosTransakcije: iznosDisplay.value };
-      showModal.value = true;
-    }
-
-    function continueGenerate() {
-      showModal.value = false;
-      if (pendingData.value) {
-        emit('generate', pendingData.value);
-        pendingData.value = null;
-      }
+      emit('generate', { ...form, iznosTransakcije: iznosDisplay.value });
     }
 
     function clear() {
@@ -349,18 +334,20 @@ export default {
       attempted.value = false;
     }
 
-    return { form, attempted, isValid, iznos, iznosDisplay, onIznosKey, generate, continueGenerate, showModal, clear, modelOptions: MODEL_OPTIONS };
+    return { form, attempted, isValid, iznos, iznosDisplay, onIznosKey, generate, clear, modelOptions: MODEL_OPTIONS };
   },
 };
 </script>
 
 <style scoped>
 .slip-form {
-  background: white;
-  border-radius: 20px;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 22px;
   padding: 2rem 2.25rem;
-  box-shadow: 0 4px 32px rgba(14, 30, 80, 0.08), 0 1px 4px rgba(0,0,0,0.04);
-  border: 1px solid rgba(59, 108, 247, 0.07);
+  box-shadow: 0 8px 40px rgba(14, 30, 80, 0.10), 0 1px 0 rgba(255,255,255,0.95) inset;
+  border: 1px solid rgba(59, 108, 247, 0.10);
 }
 
 .slip-form h2 {
@@ -390,10 +377,11 @@ export default {
 
 fieldset {
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 1.1rem 1.25rem;
-  background: #f7f9ff;
-  border: 1px solid #e8edfc;
+  background: linear-gradient(145deg, #f4f7ff 0%, #eef2ff 100%);
+  border: 1px solid rgba(59,108,247,0.09);
+  box-shadow: 0 2px 8px rgba(59,108,247,0.04);
 }
 
 legend {
@@ -481,22 +469,22 @@ legend {
 
 .btn-primary {
   padding: 0.65rem 1.75rem;
-  background: linear-gradient(135deg, #1e4ac8 0%, #3b6cf7 100%);
+  background: linear-gradient(135deg, #1740b8 0%, #3b6cf7 60%, #5d8aff 100%);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 11px;
   font-size: 0.92rem;
   font-family: inherit;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(30, 74, 200, 0.35);
+  box-shadow: 0 4px 18px rgba(30, 74, 200, 0.4), 0 1px 0 rgba(255,255,255,0.2) inset;
   transition: transform 0.15s, box-shadow 0.15s;
   letter-spacing: 0.01em;
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 22px rgba(30, 74, 200, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(30, 74, 200, 0.5), 0 1px 0 rgba(255,255,255,0.2) inset;
 }
 
 .btn-primary:active { transform: translateY(0); }
