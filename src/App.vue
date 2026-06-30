@@ -36,6 +36,13 @@
         >
           CSV uvoz
         </button>
+        <button
+          class="tab-btn tab-btn--api"
+          :class="{ active: activeTab === 'api' }"
+          @click="switchTab('api')"
+        >
+          API
+        </button>
       </nav>
       <a class="bmc-btn" href="https://buymeacoffee.com/sparkschess" target="_blank" rel="noopener">
         Buy me a coffee
@@ -58,7 +65,7 @@
       </div>
     </section>
 
-    <main class="app-main">
+    <main class="app-main" ref="mainRef">
       <!-- Single slip -->
       <div v-if="activeTab === 'single'">
         <SlipForm @generate="onSingleGenerate" />
@@ -71,6 +78,63 @@
             <PaymentSlip :userData="singleSlip" @barcode-generated="onBarcodeGenerated" />
           </div>
         </template>
+      </div>
+
+      <!-- API info -->
+      <div v-if="activeTab === 'api'" class="api-page">
+        <div class="api-header">
+          <div class="api-badge">Na upit</div>
+          <h2 class="api-title">HUB-3A REST API</h2>
+          <p class="api-sub">Integrirajte generiranje uplatnica s PDF417 barkodom direktno u vaš sustav — ERP, webshop, računovodstvo ili bilo koju drugu platformu.</p>
+        </div>
+
+        <div class="api-grid">
+          <div class="api-card">
+            <div class="api-card-label">Ulaz</div>
+            <h3>Jednostavan JSON</h3>
+            <p>Pošaljite podatke o platitelju, primatelju i iznosu. API vraća gotovu uplatnicu s ispravnim PDF417 barkodom.</p>
+            <pre class="api-code">POST /api/v1/uplatnica
+
+{
+  "imePlatitelja": "Ivan Ivić",
+  "ibanPrimatelja": "HR12...",
+  "iznosTransakcije": "150,00",
+  "opisPlacanja": "Članarina 2026"
+}</pre>
+          </div>
+
+          <div class="api-card">
+            <div class="api-card-label">Izlaz</div>
+            <h3>PNG · PDF · SVG</h3>
+            <p>Odaberite format koji vam odgovara. Podržan i batch endpoint za generiranje stotina uplatnica u jednom pozivu.</p>
+            <pre class="api-code">GET  /api/v1/uplatnica/:id.png
+GET  /api/v1/uplatnica/:id.pdf
+POST /api/v1/batch
+     → application/zip</pre>
+          </div>
+
+          <div class="api-card">
+            <div class="api-card-label">Integracija</div>
+            <h3>Brzo i pouzdano</h3>
+            <p>REST API s Bearer autentifikacijom, rate limitingom i SLA podrškom. Kompletna dokumentacija isporučena uz API ključ.</p>
+            <pre class="api-code">Authorization: Bearer &lt;api-key&gt;
+Content-Type: application/json
+
+→ 200 OK  image/png
+→ 400     validation error
+→ 429     rate limit</pre>
+          </div>
+        </div>
+
+        <div class="api-cta-box">
+          <div class="api-cta-text">
+            <strong>Zainteresirani za integraciju?</strong>
+            <span>Javite se s kratkim opisom vašeg projekta i dogovorimo detalje.</span>
+          </div>
+          <a class="api-cta-btn" href="mailto:nevendavidovic407@gmail.com?subject=HUB-3A API upit">
+            nevendavidovic407@gmail.com
+          </a>
+        </div>
       </div>
 
       <!-- CSV slips -->
@@ -140,7 +204,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import SlipForm from '@/components/SlipForm.vue';
 import CsvUpload from '@/components/CsvUpload.vue';
 import PaymentSlip from '@/components/PaymentSlip.vue';
@@ -154,6 +218,7 @@ export default {
     const singleSlip = ref(null);
     const csvSlips = ref([]);
     const zipping = ref(false);
+    const mainRef = ref(null);
 
     onMounted(() => {
       setTimeout(() => { loading.value = false; }, 3000);
@@ -161,6 +226,9 @@ export default {
 
     function switchTab(tab) {
       activeTab.value = tab;
+      nextTick(() => {
+        mainRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     }
 
     function onSingleGenerate(data) {
@@ -221,7 +289,7 @@ export default {
       }
     }
 
-    return { loading, activeTab, singleSlip, csvSlips, zipping, switchTab, onSingleGenerate, onCsvLoaded, onBarcodeGenerated, printSlips, downloadZip };
+    return { loading, activeTab, singleSlip, csvSlips, zipping, mainRef, switchTab, onSingleGenerate, onCsvLoaded, onBarcodeGenerated, printSlips, downloadZip };
   },
 };
 </script>
@@ -430,6 +498,13 @@ body {
   box-shadow: 0 2px 14px rgba(79,124,255,0.45);
 }
 
+.tab-btn--api { color: rgba(167,139,250,0.7); }
+.tab-btn--api:hover { color: #a78bfa; background: rgba(124,92,252,0.1); }
+.tab-btn--api.active {
+  background: linear-gradient(135deg, #7c5cfc 0%, #a78bfa 100%);
+  box-shadow: 0 2px 14px rgba(124,92,252,0.5);
+}
+
 /* ── BMC button ── */
 .bmc-btn {
   margin-left: auto;
@@ -629,6 +704,151 @@ body {
   font-weight: 500;
   color: rgba(255,255,255,0.5);
   letter-spacing: 0.01em;
+}
+
+/* ── API page ── */
+.api-page { padding-bottom: 2rem; }
+
+.api-header { text-align: center; margin-bottom: 2rem; }
+
+.api-badge {
+  display: inline-block;
+  padding: 0.28rem 0.8rem;
+  background: rgba(124,92,252,0.12);
+  border: 1px solid rgba(124,92,252,0.3);
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a78bfa;
+  margin-bottom: 1rem;
+}
+
+.api-title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #e8eeff;
+  margin-bottom: 0.65rem;
+}
+
+.api-sub {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.api-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.api-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.api-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,92,252,0.5), transparent);
+}
+
+.api-card-label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a78bfa;
+  margin-bottom: 0.6rem;
+}
+
+.api-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #dde6ff;
+  margin-bottom: 0.55rem;
+  letter-spacing: -0.2px;
+}
+
+.api-card p {
+  font-size: 0.81rem;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+.api-code {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  color: #a5b4fc;
+  line-height: 1.7;
+  margin: 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.api-cta-box {
+  background: rgba(124,92,252,0.08);
+  border: 1px solid rgba(124,92,252,0.2);
+  border-radius: 18px;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.api-cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.api-cta-text strong {
+  font-size: 0.95rem;
+  color: #e8eeff;
+  font-weight: 700;
+}
+
+.api-cta-text span {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.38);
+}
+
+.api-cta-btn {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  background: linear-gradient(135deg, #7c5cfc 0%, #a78bfa 100%);
+  color: white;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(124,92,252,0.4);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.api-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(124,92,252,0.55);
 }
 
 /* ── FAQ ── */
