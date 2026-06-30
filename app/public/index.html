@@ -1,17 +1,56 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="hr">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ── Primary SEO ── -->
+    <title>Generator Uplatnica – Besplatni HUB-3A generator s PDF417 barkodom</title>
+    <meta name="description" content="Besplatan online alat za generiranje HUB-3A opće uplatnice s PDF417 barkodom. Jednostavno ispunjavanje podataka platitelja i primatelja, uvoz više uplatnica iz CSV datoteke i ispis u PDF." />
+    <meta name="keywords" content="generator uplatnica, hub-3a, opća uplatnica, PDF417 barkod, hrvatska, platni nalog, uplatnica online, csv uvoz uplatnica, ispis uplatnica, uplatnica generator" />
+    <meta name="author" content="NevenDavidovic" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://nevendavidovic.github.io/generator-uplatnica/" />
+
+    <!-- ── Open Graph (Facebook, LinkedIn…) ── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nevendavidovic.github.io/generator-uplatnica/" />
+    <meta property="og:title" content="Generator Uplatnica – Besplatni HUB-3A generator" />
+    <meta property="og:description" content="Besplatan online alat za generiranje HUB-3A opće uplatnice s PDF417 barkodom. Podržava uvoz CSV podataka za batch ispis više uplatnica." />
+    <meta property="og:locale" content="hr_HR" />
+    <meta property="og:site_name" content="Generator Uplatnica" />
+
+    <!-- ── Twitter Card ── -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Generator Uplatnica – Besplatni HUB-3A generator" />
+    <meta name="twitter:description" content="Besplatan online alat za generiranje HUB-3A opće uplatnice s PDF417 barkodom i CSV uvozom." />
+
+    <!-- ── Structured data ── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Generator Uplatnica",
+      "url": "https://nevendavidovic.github.io/generator-uplatnica/",
+      "description": "Besplatan online alat za generiranje HUB-3A opće uplatnice s PDF417 barkodom. Podržava uvoz CSV podataka za batch ispis.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "inLanguage": "hr",
+      "isAccessibleForFree": true,
+      "author": {
+        "@type": "Person",
+        "name": "NevenDavidovic"
+      }
+    }
+    </script>
+
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>Za korištenje Generator Uplatnica aplikacije potrebno je uključiti JavaScript u pregledniku.</strong>
     </noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
   </body>
 </html>
