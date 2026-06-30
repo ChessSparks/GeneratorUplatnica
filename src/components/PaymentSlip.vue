@@ -168,10 +168,10 @@ export default {
 
 .uplatnica-wrapper .valuta {
   width: 50px;
-  height: 27px;
+  height: 25px;
   top: 26px;
   position: absolute;
-  left: 334px;
+  left: 345px;
   border: 0 solid;
   background: transparent;
   font-size: 12px;
@@ -180,14 +180,14 @@ export default {
 .uplatnica-wrapper .iznos {
   position: absolute;
   top: 24px;
-  left: 365px;
+  left: 345px;
   width: 285px;
   background: transparent;
   font-size: 12px;
   border: 0 solid;
   text-align: right;
   letter-spacing: 3px;
-  height: 27px;
+  height: 25px;
   padding-top: 5px;
 }
 
@@ -257,7 +257,7 @@ export default {
   width: 249px;
   position: absolute;
   background: transparent;
-  top: 178px;
+  top: 183px;
   left: 384px;
   height: 50px;
   border: 0 solid;
@@ -330,7 +330,7 @@ export default {
 .uplatnica-wrapper .opis-placanja-desno {
   position: absolute;
   bottom: 149px;
-  right: 12px;
+  right: 0px;
   width: 238px;
   border: 0 transparent;
   background: transparent;
