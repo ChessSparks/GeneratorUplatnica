@@ -258,7 +258,7 @@ export default {
   position: absolute;
   background: transparent;
   top: 194px;
-  left: 237px;
+  left: 378px;
   height: 25px;
   border: 0 solid;
   font-size: 12px;

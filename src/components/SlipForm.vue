@@ -341,105 +341,94 @@ export default {
 
 <style scoped>
 .slip-form {
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 22px;
   padding: 2rem 2.25rem;
-  box-shadow: 0 8px 40px rgba(14, 30, 80, 0.10), 0 1px 0 rgba(255,255,255,0.95) inset;
-  border: 1px solid rgba(59, 108, 247, 0.10);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 48px rgba(0,0,0,0.3);
 }
 
 .slip-form h2 {
-  font-size: 1rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #1a2035;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.slip-form h2::before {
-  content: '';
-  display: inline-block;
-  width: 4px;
-  height: 18px;
-  border-radius: 2px;
-  background: linear-gradient(180deg, #3b6cf7, #6b4ef7);
+  margin-bottom: 1.4rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 1.1rem;
+  gap: 1rem;
 }
 
 fieldset {
   border: none;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 1.1rem 1.25rem;
-  background: linear-gradient(145deg, #f4f7ff 0%, #eef2ff 100%);
-  border: 1px solid rgba(59,108,247,0.09);
-  box-shadow: 0 2px 8px rgba(59,108,247,0.04);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
 }
 
 legend {
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  color: #3b6cf7;
+  color: #6d96ff;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   padding: 0 6px;
-  background: #f7f9ff;
-  border-radius: 4px;
 }
 
-.form-field {
-  margin-bottom: 0.7rem;
-}
-
+.form-field { margin-bottom: 0.7rem; }
 .form-field:last-child { margin-bottom: 0; }
 
 .form-field label {
   display: block;
-  font-size: 0.73rem;
+  font-size: 0.71rem;
   font-weight: 500;
-  color: #64748b;
+  color: rgba(255,255,255,0.35);
   margin-bottom: 4px;
   letter-spacing: 0.01em;
 }
 
-.opt { color: #94a3b8; font-weight: 400; }
-
-.required { color: #e53e3e; }
+.opt { color: rgba(255,255,255,0.2); font-weight: 400; }
+.required { color: #f87171; }
 
 .form-field input,
 .form-field select,
 .form-field textarea {
   width: 100%;
   padding: 0.52rem 0.8rem;
-  border: 1.5px solid #e2e8f0;
+  border: 1.5px solid rgba(255,255,255,0.1);
   border-radius: 9px;
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   font-family: inherit;
-  color: #1a2035;
-  background: white;
+  color: #dde6ff;
+  background: rgba(255,255,255,0.06);
   transition: border-color 0.15s, box-shadow 0.15s;
+  color-scheme: dark;
 }
 
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
   outline: none;
-  border-color: #3b6cf7;
-  box-shadow: 0 0 0 3px rgba(59, 108, 247, 0.12);
+  border-color: #4f7cff;
+  box-shadow: 0 0 0 3px rgba(79,124,255,0.18);
 }
 
 .form-field input.invalid,
 .form-field textarea.invalid {
-  border-color: #e53e3e;
-  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+  border-color: #f87171;
+  box-shadow: 0 0 0 3px rgba(248,113,113,0.15);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: rgba(255,255,255,0.2);
 }
 
 .iznos-input {
@@ -469,7 +458,7 @@ legend {
 
 .btn-primary {
   padding: 0.65rem 1.75rem;
-  background: linear-gradient(135deg, #1740b8 0%, #3b6cf7 60%, #5d8aff 100%);
+  background: linear-gradient(135deg, #3a60e8 0%, #4f7cff 60%, #6d96ff 100%);
   color: white;
   border: none;
   border-radius: 11px;
@@ -477,48 +466,56 @@ legend {
   font-family: inherit;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(30, 74, 200, 0.4), 0 1px 0 rgba(255,255,255,0.2) inset;
+  box-shadow: 0 4px 20px rgba(79,124,255,0.45);
   transition: transform 0.15s, box-shadow 0.15s;
   letter-spacing: 0.01em;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(30, 74, 200, 0.5), 0 1px 0 rgba(255,255,255,0.2) inset;
+  box-shadow: 0 8px 30px rgba(79,124,255,0.6);
 }
 
 .btn-primary:active { transform: translateY(0); }
 
 .btn-secondary {
   padding: 0.65rem 1.25rem;
-  background: white;
-  color: #64748b;
-  border: 1.5px solid #e2e8f0;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.5);
+  border: 1.5px solid rgba(255,255,255,0.1);
   border-radius: 10px;
   font-size: 0.92rem;
   font-family: inherit;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition: all 0.15s;
 }
 
 .btn-secondary:hover {
-  background: #f7f9ff;
-  border-color: #c7d7fc;
-  color: #3b6cf7;
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.8);
 }
 
 .error-msg {
   margin-top: 0.6rem;
-  color: #e53e3e;
+  color: #f87171;
   font-size: 0.8rem;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
 }
 
-.error-msg::before { content: '⚠'; font-size: 0.85rem; }
+.error-msg::before {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #f87171;
+  box-shadow: 0 0 6px rgba(248,113,113,0.8);
+  flex-shrink: 0;
+}
 
 @media (max-width: 480px) {
   .slip-form {
@@ -531,9 +528,7 @@ legend {
     gap: 0;
   }
 
-  .form-actions {
-    flex-direction: column;
-  }
+  .form-actions { flex-direction: column; }
 
   .btn-primary,
   .btn-secondary {
