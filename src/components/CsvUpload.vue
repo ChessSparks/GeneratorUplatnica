@@ -326,4 +326,20 @@ export default {
   background: #f0f4ff;
   box-shadow: 0 2px 10px rgba(59,108,247,0.15);
 }
+
+@media (max-width: 480px) {
+  .csv-upload {
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+  }
+
+  .drop-zone {
+    padding: 1.75rem 1rem;
+  }
+
+  .btn-template {
+    width: 100%;
+    text-align: center;
+  }
+}
 </style>
