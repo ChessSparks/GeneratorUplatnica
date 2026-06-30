@@ -129,9 +129,9 @@ export default {
       if (!csvSlips.value.length || zipping.value) return;
       zipping.value = true;
       try {
-        const [{ default: JSZip }, { toPng }] = await Promise.all([
+        const [{ default: JSZip }, { default: html2canvas }] = await Promise.all([
           import('jszip'),
-          import('html-to-image'),
+          import('html2canvas'),
         ]);
 
         const zip = new JSZip();
@@ -141,7 +141,17 @@ export default {
           const slip = csvSlips.value[i];
           const rawName = (slip.imePlatitelja || '').trim() || `uplatnica_${i + 1}`;
           const safeName = rawName.replace(/[\\/:*?"<>|]/g, '_');
-          const dataUrl = await toPng(slipEls[i], { pixelRatio: 2 });
+
+          const canvas = await html2canvas(slipEls[i], {
+            scale: 2,
+            useCORS: true,
+            width: 931,
+            height: 380,
+            windowWidth: 1400,
+            logging: false,
+          });
+
+          const dataUrl = canvas.toDataURL('image/png');
           zip.file(`${safeName}.png`, dataUrl.split(',')[1], { base64: true });
         }
 
