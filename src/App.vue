@@ -42,6 +42,22 @@
       </a>
     </header>
 
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-badge">Potpuno besplatno &middot; Bez registracije &middot; Bez oglasa</div>
+        <h1 class="hero-title">HUB-3A Generator Uplatnica<br><span class="hero-accent">s PDF417 barkodom</span></h1>
+        <p class="hero-sub">Generirajte ispravne HUB-3A opće uplatnice izravno u pregledniku. Bez instalacije, bez prijave — unesite podatke i ispišite ili preuzmite za nekoliko sekundi.</p>
+        <div class="hero-features">
+          <div class="feature-chip">PDF417 barkod</div>
+          <div class="feature-chip">CSV masovni uvoz</div>
+          <div class="feature-chip">ZIP preuzimanje</div>
+          <div class="feature-chip">Ispis &amp; PDF</div>
+          <div class="feature-chip">Radi offline</div>
+          <div class="feature-chip">Open source</div>
+        </div>
+      </div>
+    </section>
+
     <main class="app-main">
       <!-- Single slip -->
       <div v-if="activeTab === 'single'">
@@ -82,6 +98,44 @@
       </div>
     </main>
 
+    <section class="faq-section">
+      <div class="faq-inner">
+        <h2 class="faq-title">Česta pitanja</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>Je li alat potpuno besplatan?</h3>
+            <p>Da. Nema naknada, pretplata, niti skrivenih troškova. Generator uplatnica je i ostaje besplatan za sve korisnike.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Trebam li se registrirati?</h3>
+            <p>Ne. Otvorite stranicu i odmah počnite koristiti. Nema prijave, nema računa, nema pohrane vaših podataka.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Što je HUB-3A uplatnica?</h3>
+            <p>HUB-3A je standardni obrazac opće uplatnice u Hrvatskoj koji sadrži podatke o platitelju, primatelju, IBAN-u i PDF417 2D barkod za brzo skeniranje na šalteru.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Mogu li generirati više uplatnica odjednom?</h3>
+            <p>Da. Koristite CSV uvoz za unos podataka za stotine uplatnica odjednom. Ispišite sve u jednom koraku ili preuzmite ZIP s individualnim slikama.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Je li PDF417 barkod ispravan?</h3>
+            <p>Da. Barkod se generira prema HUB-3A standardu i čitljiv je svim standardnim čitačima barkodova na bankomatima i poštama.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Šalju li se moji podaci negdje?</h3>
+            <p>Ne. Sve se odvija lokalno u vašem pregledniku. Vaši podaci nikada ne napuštaju vaš uređaj.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <div class="footer-inner">
+        <span>Generator Uplatnica &mdash; besplatan HUB-3A alat</span>
+        <a href="https://buymeacoffee.com/sparkschess" target="_blank" rel="noopener" class="footer-bmc">Podržite razvoj</a>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -498,6 +552,158 @@ body {
   padding-bottom: 2.5rem;
 }
 
+/* ── Hero ── */
+.hero {
+  padding: 4rem 1.5rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(79,124,255,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(79,124,255,0.12);
+  border: 1px solid rgba(79,124,255,0.3);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6d96ff;
+  margin-bottom: 1.75rem;
+}
+
+.hero-title {
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: #e8eeff;
+  margin-bottom: 1.1rem;
+}
+
+.hero-accent {
+  background: linear-gradient(135deg, #4f7cff 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  max-width: 580px;
+  margin: 0 auto 2rem;
+}
+
+.hero-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.feature-chip {
+  padding: 0.35rem 0.85rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.01em;
+}
+
+/* ── FAQ ── */
+.faq-section {
+  padding: 3.5rem 1.5rem 4rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.faq-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.faq-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #c4d0ff;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.faq-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 1.35rem 1.5rem;
+}
+
+.faq-item h3 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #dde6ff;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.1px;
+}
+
+.faq-item p {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Footer ── */
+.app-footer {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 1.25rem 1.5rem;
+}
+
+.footer-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.2);
+}
+
+.footer-bmc {
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+
+.footer-bmc:hover { color: rgba(255,255,255,0.6); }
+
 /* ── Mobile ── */
 @media (max-width: 640px) {
   .app-header {
@@ -539,9 +745,16 @@ body {
   .btn-print { width: 100%; text-align: center; }
 }
 
+@media (max-width: 640px) {
+  .hero { padding: 2.5rem 1rem 2rem; }
+  .footer-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .faq-section { padding: 2.5rem 0.75rem 3rem; }
+}
+
 /* ── Print ── */
 @media print {
-  .app-header, .preview-bar, .slip-form, .csv-upload { display: none !important; }
+  .app-header, .preview-bar, .slip-form, .csv-upload,
+  .hero, .faq-section, .app-footer { display: none !important; }
   body { background: white; }
   .app-main { margin: 0; padding: 0; max-width: none; }
   .print-area { gap: 0; }
