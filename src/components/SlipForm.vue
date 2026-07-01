@@ -334,20 +334,18 @@ export default {
 
 <style scoped>
 .slip-form {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: #ffffff;
   border-radius: 22px;
   padding: 2rem 2.25rem;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 8px 48px rgba(0,0,0,0.3);
+  border: 1px solid rgba(15,23,42,0.08);
+  box-shadow: 0 8px 32px rgba(15,23,42,0.06);
 }
 
 .slip-form h2 {
   font-size: 0.72rem;
   font-weight: 700;
   margin-bottom: 1.4rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(26,31,54,0.45);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -362,14 +360,14 @@ fieldset {
   border: none;
   border-radius: 14px;
   padding: 1.1rem 1.25rem;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(15,23,42,0.025);
+  border: 1px solid rgba(15,23,42,0.07);
 }
 
 legend {
   font-size: 0.62rem;
   font-weight: 700;
-  color: #6d96ff;
+  color: #3a60e8;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   padding: 0 6px;
@@ -382,27 +380,26 @@ legend {
   display: block;
   font-size: 0.71rem;
   font-weight: 500;
-  color: rgba(255,255,255,0.35);
+  color: rgba(26,31,54,0.55);
   margin-bottom: 4px;
   letter-spacing: 0.01em;
 }
 
-.opt { color: rgba(255,255,255,0.2); font-weight: 400; }
-.required { color: #f87171; }
+.opt { color: rgba(26,31,54,0.35); font-weight: 400; }
+.required { color: #dc2626; }
 
 .form-field input,
 .form-field select,
 .form-field textarea {
   width: 100%;
   padding: 0.52rem 0.8rem;
-  border: 1.5px solid rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(15,23,42,0.12);
   border-radius: 9px;
   font-size: 0.87rem;
   font-family: inherit;
-  color: #dde6ff;
-  background: rgba(255,255,255,0.06);
+  color: #1a1f36;
+  background: #ffffff;
   transition: border-color 0.15s, box-shadow 0.15s;
-  color-scheme: dark;
 }
 
 .form-field input:focus,
@@ -415,13 +412,13 @@ legend {
 
 .form-field input.invalid,
 .form-field textarea.invalid {
-  border-color: #f87171;
-  box-shadow: 0 0 0 3px rgba(248,113,113,0.15);
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220,38,38,0.12);
 }
 
 .form-field input::placeholder,
 .form-field textarea::placeholder {
-  color: rgba(255,255,255,0.2);
+  color: rgba(26,31,54,0.3);
 }
 
 .iznos-input {
@@ -473,9 +470,9 @@ legend {
 
 .btn-secondary {
   padding: 0.65rem 1.25rem;
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.5);
-  border: 1.5px solid rgba(255,255,255,0.1);
+  background: rgba(15,23,42,0.04);
+  color: rgba(26,31,54,0.6);
+  border: 1.5px solid rgba(15,23,42,0.1);
   border-radius: 10px;
   font-size: 0.92rem;
   font-family: inherit;
@@ -485,14 +482,14 @@ legend {
 }
 
 .btn-secondary:hover {
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(255,255,255,0.18);
-  color: rgba(255,255,255,0.8);
+  background: rgba(15,23,42,0.07);
+  border-color: rgba(15,23,42,0.18);
+  color: #1a1f36;
 }
 
 .error-msg {
   margin-top: 0.6rem;
-  color: #f87171;
+  color: #dc2626;
   font-size: 0.8rem;
   font-weight: 500;
   display: flex;
@@ -505,8 +502,8 @@ legend {
   display: inline-block;
   width: 5px; height: 5px;
   border-radius: 50%;
-  background: #f87171;
-  box-shadow: 0 0 6px rgba(248,113,113,0.8);
+  background: #dc2626;
+  box-shadow: 0 0 6px rgba(220,38,38,0.6);
   flex-shrink: 0;
 }
 

@@ -158,64 +158,62 @@ export default {
 
 <style scoped>
 .csv-upload {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: #ffffff;
   border-radius: 22px;
   padding: 2rem 2.25rem;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 8px 48px rgba(0,0,0,0.3);
+  border: 1px solid rgba(15,23,42,0.08);
+  box-shadow: 0 8px 32px rgba(15,23,42,0.06);
 }
 
 .csv-upload h2 {
   font-size: 0.72rem;
   font-weight: 700;
   margin-bottom: 1.4rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(26,31,54,0.45);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 .drop-zone {
-  border: 1.5px dashed rgba(255,255,255,0.12);
+  border: 1.5px dashed rgba(15,23,42,0.15);
   border-radius: 16px;
   padding: 2.5rem 2rem;
   text-align: center;
-  background: rgba(255,255,255,0.03);
+  background: rgba(15,23,42,0.02);
   transition: all 0.2s;
   cursor: default;
 }
 
 .drop-zone.dragging {
-  background: rgba(79,124,255,0.08);
+  background: rgba(79,124,255,0.06);
   border-color: #4f7cff;
-  box-shadow: 0 0 0 3px rgba(79,124,255,0.15);
+  box-shadow: 0 0 0 3px rgba(79,124,255,0.12);
 }
 
 .drop-zone.loaded {
-  background: rgba(74,222,128,0.06);
-  border-color: rgba(74,222,128,0.4);
+  background: rgba(22,163,74,0.05);
+  border-color: rgba(22,163,74,0.4);
   border-style: solid;
 }
 
 .drop-hint {
   font-size: 0.88rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(26,31,54,0.55);
   font-weight: 500;
   margin: 0;
 }
 
 .file-link {
-  color: #6d96ff;
+  color: #3a60e8;
   cursor: pointer;
   font-weight: 600;
   text-decoration: none;
-  border-bottom: 1px solid rgba(109,150,255,0.3);
+  border-bottom: 1px solid rgba(58,96,232,0.35);
   padding-bottom: 1px;
   transition: border-color 0.15s, color 0.15s;
 }
 
-.file-link:hover { border-color: #6d96ff; color: #8fb0ff; }
+.file-link:hover { border-color: #3a60e8; color: #4f7cff; }
 .file-link input[type='file'] { display: none; }
 
 .file-info {
@@ -227,14 +225,14 @@ export default {
 
 .file-name {
   font-weight: 600;
-  color: #4ade80;
+  color: #16a34a;
   font-size: 0.9rem;
 }
 
 .btn-remove {
-  background: rgba(248,113,113,0.08);
-  border: 1.5px solid rgba(248,113,113,0.35);
-  color: #f87171;
+  background: rgba(220,38,38,0.06);
+  border: 1.5px solid rgba(220,38,38,0.3);
+  color: #dc2626;
   border-radius: 6px;
   padding: 3px 10px;
   font-size: 0.75rem;
@@ -245,20 +243,20 @@ export default {
 }
 
 .btn-remove:hover {
-  background: rgba(248,113,113,0.15);
-  border-color: rgba(248,113,113,0.6);
+  background: rgba(220,38,38,0.12);
+  border-color: rgba(220,38,38,0.5);
 }
 
 .msg-error {
   margin-top: 0.85rem;
-  color: #f87171;
+  color: #dc2626;
   font-size: 0.83rem;
   font-weight: 500;
 }
 
 .msg-success {
   margin-top: 0.85rem;
-  color: #4ade80;
+  color: #16a34a;
   font-size: 0.85rem;
   font-weight: 600;
 }
@@ -266,13 +264,13 @@ export default {
 .csv-info {
   margin-top: 1.5rem;
   padding-top: 1.25rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
+  border-top: 1px solid rgba(15,23,42,0.07);
 }
 
 .info-title {
   font-size: 0.65rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.25);
+  color: rgba(26,31,54,0.4);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 0.5rem;
@@ -281,22 +279,22 @@ export default {
 .csv-cols {
   display: block;
   font-size: 0.68rem;
-  background: rgba(255,255,255,0.04);
+  background: rgba(15,23,42,0.03);
   padding: 8px 12px;
   border-radius: 8px;
   margin-bottom: 1rem;
   word-break: break-all;
-  color: #6d96ff;
+  color: #3a60e8;
   font-family: 'Courier New', monospace;
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid rgba(15,23,42,0.07);
   line-height: 1.7;
 }
 
 .btn-template {
   padding: 0.5rem 1.2rem;
-  background: rgba(79,124,255,0.1);
+  background: rgba(79,124,255,0.08);
   border: 1.5px solid rgba(79,124,255,0.3);
-  color: #6d96ff;
+  color: #3a60e8;
   border-radius: 9px;
   font-size: 0.84rem;
   font-family: inherit;
@@ -306,9 +304,9 @@ export default {
 }
 
 .btn-template:hover {
-  background: rgba(79,124,255,0.18);
+  background: rgba(79,124,255,0.14);
   border-color: rgba(79,124,255,0.5);
-  color: #8fb0ff;
+  color: #2947b8;
 }
 
 @media (max-width: 480px) {
