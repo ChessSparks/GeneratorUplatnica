@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nevendavidovic.github.io/generator-uplatnica/sitemap.xml
+Sitemap: https://chesssparks.github.io/GeneratorUplatnica/sitemap.xml

@@ -250,7 +250,7 @@
 import { ref, reactive, computed } from 'vue';
 
 const MODEL_OPTIONS = [
-  'HR99','HR01','HR02','HR03','HR04','HR05','HR06','HR07','HR08','HR09','HR10',
+  'HR01','HR02','HR03','HR04','HR05','HR06','HR07','HR08','HR09','HR10',
   'HR11','HR12','HR13','HR14','HR15','HR16','HR17','HR18','HR23','HR24',
   'HR25','HR26','HR27','HR28','HR29','HR30','HR31','HR33','HR34','HR40',
   'HR41','HR42','HR43','HR50','HR55','HR62','HR63','HR64','HR65','HR67',
